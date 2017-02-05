@@ -13,7 +13,8 @@ public class PianoPanel extends JPanel{
 	public static final int SCREEN_LENGTH = 700;
 	public static final int SCREEN_HEIGHT = 750;
 	public static final int LINE_HEIGHT = 600;
-	int framesPassed = 0;
+	public int framesPassed = 0;
+	private int displayScore = 0;
 	ArrayList<Note> notes;
 	
 	public PianoPanel(){
@@ -34,19 +35,29 @@ public class PianoPanel extends JPanel{
 		}
 		g.setColor(Color.yellow);
 		g.fillRect(0, LINE_HEIGHT, 700, 10);
+		g.setColor(Color.black);
+		g.fillRect(340, LINE_HEIGHT, 20, 10);
 		framesPassed++;
 		drawNotes(g);
 		g.setColor(Color.black);
-		g.drawString(Integer.toString(framesPassed), 600, 100);
+		g.drawString(Integer.toString(displayScore), 600, 100);
+	}
+	
+	public void updateScore (int newScore){
+		displayScore = newScore;
 	}
 	
 	public void drawNotes (Graphics g){
 		for (Note e : notes){
-			if (- e.distanceFromLine + 9 * framesPassed > 0 && - e.distanceFromLine + 9 * framesPassed < SCREEN_HEIGHT - LINE_HEIGHT){
+			/*if (- e.distanceFromLine + 9 * framesPassed > 0 && - e.distanceFromLine + 9 * framesPassed < SCREEN_HEIGHT - LINE_HEIGHT){
 				g.setColor(new Color(1.0f,1.0f,1.0f, 1.0f - (float)((- e.distanceFromLine + 9 * framesPassed)/(float)(SCREEN_HEIGHT - LINE_HEIGHT))));
-			} else {
-				g.setColor(Color.black);
-			}
+			} else {*/
+				if (e.isScored){
+					g.setColor(Color.RED);
+				} else {
+					g.setColor(Color.black);
+				}
+			//}
 			g.fillRect(e.keyPos * 100, LINE_HEIGHT - e.distanceFromLine + 9 * framesPassed, 100, 30);
 		}
 	}

@@ -18,10 +18,19 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class Runtime implements Runnable {
 
-    int tempo;
+    private static final int SCORE_BOUNDARY = -50;
+
+	private static final int MISSED_SCORE = -50;
+
+	private static final int NORMAL_SCORE = 400;
+	
+	private static final int PERFECT_SCORE = 1000;
+    
+	int tempo;
     int mpb;
     int timesig;
     int bpm;
+    public int score = 0;
     
     boolean[] isKeyPressed;
     
@@ -131,6 +140,37 @@ public class Runtime implements Runnable {
      * conditions, etc
      */
     void update() {
+    	//Flip switches
+    	for (Note e: test){
+    		int cDistance = - e.distanceFromLine + 9 * panel.framesPassed;
+    		if (e.isChecked && !e.isScored){
+    			if (cDistance > 10){
+					e.isScored = true;
+					score += MISSED_SCORE;
+    			} else {
+	    			if (isKeyPressed[e.keyPos]){
+	    				System.out.println(cDistance);
+	    				if (cDistance < -30){
+	    					e.isScored = true;
+	    					score += MISSED_SCORE;
+	    				} else {
+	    					if (cDistance < 10 - 30 || cDistance > 0){
+	    						e.isScored = true;
+	    						score += NORMAL_SCORE;
+	    					} else {
+	    						e.isScored = true;
+	    						score += PERFECT_SCORE;
+	    					}
+	    				}
+	    			}
+    			}
+    		} else {
+        		if (cDistance > SCORE_BOUNDARY && !e.isScored){
+        			e.isChecked = true;
+        		}
+    		}
+    	}
+    	panel.updateScore(score);
     	panel.repaint();
     }
 
