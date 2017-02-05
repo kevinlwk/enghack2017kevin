@@ -42,7 +42,7 @@ public class PianoPanel extends JPanel{
 	public void drawNotes (Graphics g){
 		g.setColor(Color.black);
 		for (Note e : notes){
-			g.drawRect(e.keyPos * 100, LINE_HEIGHT - e.distanceFromLine + 3 * framesPassed, 100, 30);
+			g.drawRect(e.keyPos * 100, LINE_HEIGHT - e.distanceFromLine + 9 * framesPassed, 100, 30);
 		}
 	}
 }
