@@ -39,6 +39,10 @@ public class Runtime implements Runnable {
 
             update();
             
+            if (IsKeyPressed.isThisPressed()[3]) {
+            	System.out.println("wow u pressed space");
+            }
+            
             time = (1000 / 60) - (System.currentTimeMillis() - time);
 
             if (time > 0) {
@@ -137,7 +141,7 @@ public class Runtime implements Runnable {
     	return output;
     	
     }
-
+    
     static boolean isRunning() {
 
         return true;
