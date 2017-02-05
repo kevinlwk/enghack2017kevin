@@ -1,5 +1,6 @@
 package rhythmmaster;
 
+import java.awt.event.KeyEvent;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,6 +23,8 @@ public class Runtime implements Runnable {
     int timesig;
     int bpm;
     
+    boolean[] isKeyPressed;
+    
     PianoPanel panel;
     
     ArrayList<Note> test;
@@ -30,18 +33,15 @@ public class Runtime implements Runnable {
     	
         test = new ArrayList<Note>();
         test = read("twinkle twinkle little star.txt");
+        isKeyPressed = new boolean[7];
         
         initialize(test);
         
         while (isRunning()) {
 
             long time = System.currentTimeMillis();
-
-            update();
             
-            if (IsKeyPressed.isThisPressed()[3]) {
-            	System.out.println("wow u pressed space");
-            }
+            update();
             
             time = (1000 / 60) - (System.currentTimeMillis() - time);
 
@@ -53,20 +53,79 @@ public class Runtime implements Runnable {
             }
         }
     }
-
+    
     /**
      * This method will set up everything need for the game to run
      */
     void initialize(ArrayList<Note> song) {
-
+    	
 		JFrame window = new JFrame("Rhythmmaster1999");
 		panel = new PianoPanel(song);
 		window.setContentPane(panel);
 		window.setSize(PianoPanel.SCREEN_LENGTH, PianoPanel.SCREEN_HEIGHT);
 		window.setResizable(false);
 		window.setVisible(true);
+		window.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+            	formKeyReleased(evt);
+            }
+        });
     }
-
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {                                
+        switch(evt.getKeyCode()){
+	        case KeyEvent.VK_S:
+	        	isKeyPressed[0] = true;
+	        	break;
+	        case KeyEvent.VK_D:
+	        	isKeyPressed[1] = true;
+	        	break;
+	        case KeyEvent.VK_F:
+	        	isKeyPressed[2] = true;
+	        	break;
+	        case KeyEvent.VK_SPACE:
+	        	isKeyPressed[3] = true;
+	        	break;
+	        case KeyEvent.VK_J:
+	        	isKeyPressed[4] = true;
+	        	break;
+	        case KeyEvent.VK_K:
+	        	isKeyPressed[5] = true;
+	        	break;
+	        case KeyEvent.VK_L:
+	        	isKeyPressed[6] = true;
+	        	break;
+	        }
+    }    
+    
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {                                
+        switch(evt.getKeyCode()){
+	        case KeyEvent.VK_S:
+	        	isKeyPressed[0] = false;
+	        	break;
+	        case KeyEvent.VK_D:
+	        	isKeyPressed[1] = false;
+	        	break;
+	        case KeyEvent.VK_F:
+	        	isKeyPressed[2] = false;
+	        	break;
+	        case KeyEvent.VK_SPACE:
+	        	isKeyPressed[3] = false;
+	        	break;
+	        case KeyEvent.VK_J:
+	        	isKeyPressed[4] = false;
+	        	break;
+	        case KeyEvent.VK_K:
+	        	isKeyPressed[5] = false;
+	        	break;
+	        case KeyEvent.VK_L:
+	        	isKeyPressed[6] = false;
+	        	break;
+	        }
+    }    
+    
     /**
      * This method will check for input move things around and check for win
      * conditions, etc
