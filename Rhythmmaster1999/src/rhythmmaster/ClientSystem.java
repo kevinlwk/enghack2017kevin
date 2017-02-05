@@ -1,6 +1,8 @@
-package ui;
+package rhythmmaster;
 
 import javax.swing.JFrame;
+
+import ui.PianoPanel;
 
 public class ClientSystem {
 	public static void main (String[] args){
