@@ -18,7 +18,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class Runtime implements Runnable {
 
-    private static final int SCORE_BOUNDARY = -50;
+    private static final int SCORE_BOUNDARY = -70;
 
 	private static final int MISSED_SCORE = -50;
 
@@ -32,7 +32,7 @@ public class Runtime implements Runnable {
     int bpm;
     public int score = 0;
     
-    boolean[] isKeyPressed;
+    public boolean[] isKeyPressed;
     
     PianoPanel panel;
     
@@ -41,7 +41,7 @@ public class Runtime implements Runnable {
     public void run() {
     	
         test = new ArrayList<Note>();
-        test = read("twinkle twinkle little star.txt");
+        test = read("carelessWhisper.txt");
         isKeyPressed = new boolean[7];
         
         initialize(test);
@@ -69,7 +69,7 @@ public class Runtime implements Runnable {
     void initialize(ArrayList<Note> song) {
     	
 		JFrame window = new JFrame("Rhythmmaster1999");
-		panel = new PianoPanel(song);
+		panel = new PianoPanel(song,this);
 		window.setContentPane(panel);
 		window.setSize(PianoPanel.SCREEN_LENGTH, PianoPanel.SCREEN_HEIGHT);
 		window.setResizable(false);
@@ -144,17 +144,17 @@ public class Runtime implements Runnable {
     	for (Note e: test){
     		int cDistance = - e.distanceFromLine + 9 * panel.framesPassed;
     		if (e.isChecked && !e.isScored){
-    			if (cDistance > 10){
+    			if (cDistance > PianoPanel.LINE_SIZE){
 					e.isScored = true;
 					score += MISSED_SCORE;
     			} else {
 	    			if (isKeyPressed[e.keyPos]){
 	    				System.out.println(cDistance);
-	    				if (cDistance < -30){
+	    				if (cDistance < -Note.SHORT_NOTE_SIZE){
 	    					e.isScored = true;
 	    					score += MISSED_SCORE;
 	    				} else {
-	    					if (cDistance < 10 - 30 || cDistance > 0){
+	    					if (cDistance < PianoPanel.LINE_SIZE - Note.SHORT_NOTE_SIZE || cDistance > 0){
 	    						e.isScored = true;
 	    						score += NORMAL_SCORE;
 	    					} else {

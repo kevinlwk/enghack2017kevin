@@ -8,6 +8,8 @@ public class Note {
     public boolean isScored = false;
     public boolean isChecked;
     
+    public static final int SHORT_NOTE_SIZE = 45;
+    
     public Note (){
     	keyPos = 0;
     	time = 0;
