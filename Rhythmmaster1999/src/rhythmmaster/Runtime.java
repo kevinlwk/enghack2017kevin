@@ -12,6 +12,8 @@ import java.util.StringTokenizer;
 
 import javax.swing.JFrame;
 
+import ui.BouncyBall;
+import ui.Paddle;
 import ui.PianoPanel;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -21,6 +23,8 @@ public class Runtime implements Runnable {
     private static final int SCORE_BOUNDARY = -70;
 
 	private static final int MISSED_SCORE = -50;
+	
+	private static final int GRACE_SCORE = 0;
 
 	private static final int NORMAL_SCORE = 400;
 	
@@ -31,6 +35,10 @@ public class Runtime implements Runnable {
     int timesig;
     int bpm;
     public int score = 0;
+    
+    public BouncyBall ball;
+    
+    public Paddle paddle;
     
     public boolean[] isKeyPressed;
     
@@ -43,7 +51,8 @@ public class Runtime implements Runnable {
         test = new ArrayList<Note>();
         test = read("carelessWhisper.txt");
         isKeyPressed = new boolean[7];
-        
+        ball = new BouncyBall(350,600,5,-3,30);
+        paddle = new Paddle(350 - Paddle.PADDLE_SIZE/2);
         initialize(test);
         
         while (isRunning()) {
@@ -106,7 +115,14 @@ public class Runtime implements Runnable {
 	        case KeyEvent.VK_L:
 	        	isKeyPressed[6] = true;
 	        	break;
+	        case KeyEvent.VK_SEMICOLON:
+	        	paddle.move(true);
+	        	break;
+	        default : break;
 	        }
+        if(evt.getKeyChar()=='\''){
+        	paddle.move(false);
+        }
     }    
     
     private void formKeyReleased(java.awt.event.KeyEvent evt) {                                
@@ -146,7 +162,12 @@ public class Runtime implements Runnable {
     		if (e.isChecked && !e.isScored){
     			if (cDistance > PianoPanel.LINE_SIZE){
 					e.isScored = true;
-					score += MISSED_SCORE;
+					if (e.isHit){
+						score += GRACE_SCORE;
+					} else {
+						score += MISSED_SCORE;
+						e.missed = true;
+					}
     			} else {
 	    			if (isKeyPressed[e.keyPos]){
 	    				System.out.println(cDistance);
@@ -170,6 +191,8 @@ public class Runtime implements Runnable {
         		}
     		}
     	}
+    	ball.ChangePosition();
+    	ball.checkCollision(test, panel.framesPassed, paddle);
     	panel.updateScore(score);
     	panel.repaint();
     }
