@@ -123,7 +123,8 @@ public class Runtime implements Runnable {
     			length = ((endbeat - beat));
     		}
     		
-    		startDistance = (beat*10) + STARTBUFFER;
+    		startDistance = time + STARTBUFFER;
+    		System.out.println(startDistance);
     		
     		if (longNote == true) {
     			tempNote = new Long (position, time, startDistance, length);
