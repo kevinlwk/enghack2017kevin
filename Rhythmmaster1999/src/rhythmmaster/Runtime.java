@@ -27,11 +27,11 @@ public class Runtime implements Runnable {
     ArrayList<Note> test;
     
     public void run() {
-        
-        initialize();
-        
+    	
         test = new ArrayList<Note>();
         test = read("twinkle twinkle little star.txt");
+        
+        initialize(test);
         
         while (isRunning()) {
 
@@ -53,10 +53,10 @@ public class Runtime implements Runnable {
     /**
      * This method will set up everything need for the game to run
      */
-    void initialize() {
+    void initialize(ArrayList<Note> song) {
 
 		JFrame window = new JFrame("Rhythmmaster1999");
-		panel = new PianoPanel();
+		panel = new PianoPanel(song);
 		window.setContentPane(panel);
 		window.setSize(PianoPanel.SCREEN_LENGTH, PianoPanel.SCREEN_HEIHGT);
 		window.setResizable(false);
