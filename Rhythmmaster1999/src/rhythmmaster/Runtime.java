@@ -9,22 +9,18 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.swing.JFrame;
+
+import ui.PianoPanel;
+
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import static rhythmmaster.Rhythmmaster1999.kevin;
 
 public class Runtime implements Runnable {
 
     int tempo;
     int mpb;
-    int x;
     int timesig;
     int bpm;
-    
-    public Runtime(int tempo) {
-        this.tempo = tempo;
-        mpb = Math.round(60*1000/tempo);
-        x = 0;
-    }
     
     public void run() {
         
@@ -39,8 +35,7 @@ public class Runtime implements Runnable {
 
             update();
             
-            x++;
-            time = (1000 / tempo) - (System.currentTimeMillis() - time);
+            time = (1000 / 60) - (System.currentTimeMillis() - time);
 
             if (time > 0) {
                 try {
@@ -49,7 +44,6 @@ public class Runtime implements Runnable {
                 }
             }
         }
-        kevin.setVisible(false);
     }
 
     /**
@@ -57,11 +51,12 @@ public class Runtime implements Runnable {
      */
     static void initialize() {
 
-        kevin.setTitle("Rhythmmaster");
-        kevin.setSize(C.SCREENWIDTH, C.SCREENHEIGHT);
-        kevin.setResizable(false);
-        kevin.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        kevin.setVisible(true);
+		JFrame window = new JFrame("Rhythmmaster1999");
+		PianoPanel panel = new PianoPanel();
+		window.setContentPane(panel);
+		window.setSize(PianoPanel.SCREEN_LENGTH, PianoPanel.SCREEN_HEIHGT);
+		window.setResizable(false);
+		window.setVisible(true);
     }
 
     /**
@@ -69,7 +64,7 @@ public class Runtime implements Runnable {
      * conditions, etc
      */
     void update() {
-
+    	
     }
 
     /**
