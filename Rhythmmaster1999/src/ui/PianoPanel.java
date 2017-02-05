@@ -30,7 +30,7 @@ public class PianoPanel extends JPanel{
 	
 	public void drawNotes (Graphics g, ArrayList<Note> notes){
 		for (Note e : notes){
-			g.drawRect(e.keyPos * 100, e.distanceFromTop, 100, 30);
+			g.drawRect(e.keyPos * 100, e.distanceFromLine, 100, 30);
 		}
 	}
 }
