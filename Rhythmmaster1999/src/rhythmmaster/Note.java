@@ -12,10 +12,10 @@ public class Note {
     	distanceFromLine = 0;
     }
     
-    public Note (int keyPos, int time){
+    public Note (int keyPos, int time, int distanceFromLine){
         this.keyPos = keyPos;
         this.time = time;
-        distanceFromLine = 0;
+        this.distanceFromLine = distanceFromLine;
     }
     
 }

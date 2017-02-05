@@ -88,7 +88,7 @@ public class Runtime implements Runnable {
     	} catch (Exception e) {}
     	
     	StringTokenizer st = new StringTokenizer(temp.get(0), "#");
-    	for (int i = 0; i < st.countTokens(); i++) {
+    	for (int i = 0; i < 2; i++) {
     		String tempStr = st.nextToken();
     		if (i == 0) {
     			timesig = Integer.parseInt(tempStr.trim());
@@ -108,6 +108,9 @@ public class Runtime implements Runnable {
     		int position = 0;
     		int endbeat = 0;
     		int length = 0;
+    		int startDistance = 0;
+    		
+    		final int STARTBUFFER = 1920;
     		
     		measure = Integer.parseInt(st.nextToken());
     		beat = Integer.parseInt(st.nextToken());
@@ -120,10 +123,12 @@ public class Runtime implements Runnable {
     			length = ((endbeat - beat));
     		}
     		
+    		startDistance = (beat*10) + STARTBUFFER;
+    		
     		if (longNote == true) {
-    			tempNote = new Long (position, time, length);
+    			tempNote = new Long (position, time, startDistance, length);
     		} else if (longNote == false) {
-    			tempNote = new Short (position, time);
+    			tempNote = new Short (position, time, startDistance);
     		}
     		
     		output.add(tempNote);    		
