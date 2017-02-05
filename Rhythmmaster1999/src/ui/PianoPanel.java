@@ -29,6 +29,7 @@ public class PianoPanel extends JPanel{
 	}
 	
 	public void drawNotes (Graphics g, ArrayList<Note> notes){
+		g.setColor(Color.black);
 		for (Note e : notes){
 			g.drawRect(e.keyPos * 100, e.distanceFromLine, 100, 30);
 		}
