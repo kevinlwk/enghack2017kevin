@@ -4,9 +4,16 @@ import rhythmmaster.Runtime;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.sound.midi.*;
 
 public class PianoPanel extends JPanel{
 	Runtime runtime;
@@ -27,6 +34,16 @@ public class PianoPanel extends JPanel{
 		new PianoPanel();
 		this.notes = notes;
 		this.context=context;
+    		/*try {
+    			Sequencer sequencer = MidiSystem.getSequencer();
+    			sequencer.open();
+    			InputStream is = new BufferedInputStream(new FileInputStream(new File("happybirthday.mid")));
+    			sequencer.setSequence(is);
+    			sequencer.start();
+    		} catch (Exception e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}*/
 	}
 	
 	@Override

@@ -10,6 +10,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequencer;
 import javax.swing.JFrame;
 
 import ui.BouncyBall;
@@ -155,7 +157,7 @@ public class Runtime implements Runnable {
      * conditions, etc
      */
     void update() {
-    	//Flip switches
+    	//Flip switches'
     	for (Note e: test){
     		int cDistance = - e.distanceFromLine + 9 * panel.framesPassed;
     		if (e.isChecked && !e.isScored){
