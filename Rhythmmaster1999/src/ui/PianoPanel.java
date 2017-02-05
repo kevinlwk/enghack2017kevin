@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 public class PianoPanel extends JPanel{
 	Runtime runtime;
 	public static final int SCREEN_LENGTH = 700;
-	public static final int SCREEN_HEIHGT = 750;
-	public static final int LINE_HEIGHT = 680;
+	public static final int SCREEN_HEIGHT = 750;
+	public static final int LINE_HEIGHT = 600;
 	int framesPassed = 0;
 	ArrayList<Note> notes;
 	
@@ -36,13 +36,18 @@ public class PianoPanel extends JPanel{
 		g.fillRect(0, LINE_HEIGHT, 700, 10);
 		framesPassed++;
 		drawNotes(g);
+		g.setColor(Color.black);
 		g.drawString(Integer.toString(framesPassed), 600, 100);
 	}
 	
 	public void drawNotes (Graphics g){
-		g.setColor(Color.black);
 		for (Note e : notes){
-			g.drawRect(e.keyPos * 100, LINE_HEIGHT - e.distanceFromLine + 9 * framesPassed, 100, 30);
+			if (- e.distanceFromLine + 9 * framesPassed > 0 && - e.distanceFromLine + 9 * framesPassed < SCREEN_HEIGHT - LINE_HEIGHT){
+				g.setColor(new Color(1.0f,1.0f,1.0f, (float)((- e.distanceFromLine + 9 * framesPassed)/(float)(SCREEN_HEIGHT - LINE_HEIGHT))));
+			} else {
+				g.setColor(Color.black);
+			}
+			g.fillRect(e.keyPos * 100, LINE_HEIGHT - e.distanceFromLine + 9 * framesPassed, 100, 30);
 		}
 	}
 }

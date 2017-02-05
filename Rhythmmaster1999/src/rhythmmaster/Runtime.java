@@ -58,7 +58,7 @@ public class Runtime implements Runnable {
 		JFrame window = new JFrame("Rhythmmaster1999");
 		panel = new PianoPanel(song);
 		window.setContentPane(panel);
-		window.setSize(PianoPanel.SCREEN_LENGTH, PianoPanel.SCREEN_HEIHGT);
+		window.setSize(PianoPanel.SCREEN_LENGTH, PianoPanel.SCREEN_HEIGHT);
 		window.setResizable(false);
 		window.setVisible(true);
     }
@@ -124,7 +124,6 @@ public class Runtime implements Runnable {
     		}
     		
     		startDistance = time*30 + STARTBUFFER;
-    		System.out.println(startDistance);
     		
     		if (longNote == true) {
     			tempNote = new Long (position, time, startDistance, length);
