@@ -5,11 +5,6 @@ package rhythmmaster;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import javax.swing.JFrame;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -43,8 +38,7 @@ public class Runtime implements Runnable {
             long time = System.currentTimeMillis();
 
             update();
-            draw();
-
+            
             x++;
             time = (1000 / tempo) - (System.currentTimeMillis() - time);
 
