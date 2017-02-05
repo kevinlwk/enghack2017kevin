@@ -13,6 +13,7 @@ public class PianoPanel extends JPanel{
 	public static final int SCREEN_LENGTH = 700;
 	public static final int SCREEN_HEIHGT = 750;
 	public static final int LINE_HEIGHT = 680;
+	int framesPassed = 0;
 	
 	@Override
 	protected void paintComponent(Graphics g){
@@ -23,9 +24,13 @@ public class PianoPanel extends JPanel{
 		}
 		g.setColor(Color.yellow);
 		g.fillRect(0, LINE_HEIGHT, 700, 10);
+		framesPassed++;
+		g.drawString(Integer.toString(framesPassed), 600, 100);
 	}
 	
 	public void drawNotes (Graphics g, ArrayList<Note> notes){
-		
+		for (Note e : notes){
+			g.drawRect(e.keyPos * 100, e.distanceFromTop, 100, 30);
+		}
 	}
 }

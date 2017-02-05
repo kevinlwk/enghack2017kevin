@@ -2,9 +2,9 @@ package rhythmmaster;
 
 public class Note {
     
-    int keyPos;
-    int time;
-    int distanceFromTop;
+    public int keyPos;
+    public int time;
+    public int distanceFromTop;
     
     public Note (){
     	keyPos = 0;
