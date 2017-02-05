@@ -2,17 +2,20 @@ package rhythmmaster;
 
 public class Note {
     
-    double speed;
-    double time;
+    int keyPos;
+    int time;
+    int distanceFromTop;
     
     public Note (){
-    	speed = 0;
+    	keyPos = 0;
     	time = 0;
+    	distanceFromTop = 0;
     }
     
-    public Note (double speed, double time, boolean checked){
-        this.speed = speed;
+    public Note (int keyPos, int time){
+        this.keyPos = keyPos;
         this.time = time;
+        distanceFromTop = 0;
     }
     
 }

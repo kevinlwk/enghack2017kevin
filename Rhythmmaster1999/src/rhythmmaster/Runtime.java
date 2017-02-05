@@ -22,6 +22,8 @@ public class Runtime extends JFrame {
     int tempo;
     int mpb;
     int x;
+    int timesig;
+    int bpm;
     
     public Runtime(int tempo) {
         this.tempo = tempo;
@@ -32,6 +34,10 @@ public class Runtime extends JFrame {
     void run() {
         
         initialize();
+        
+        ArrayList<Note> test = new ArrayList<Note>();
+        test = read("twinkle twinkle little star.txt");
+        
         while (isRunning()) {
 
             long time = System.currentTimeMillis();
@@ -75,10 +81,10 @@ public class Runtime extends JFrame {
     /**
      * This method will draw everything
      */
-    ArrayList<String> read(){
+    ArrayList<Note> read(String filename){
     	ArrayList<String> temp = new ArrayList<String>();
     	
-    	try (FileInputStream fis = new FileInputStream(String filename)) {
+    	try (FileInputStream fis = new FileInputStream(filename)) {
     		InputStreamReader isr = new InputStreamReader(fis);
     		BufferedReader br = new BufferedReader(isr);
     		
@@ -86,15 +92,50 @@ public class Runtime extends JFrame {
     			temp.add(br.readLine().trim());
     		}
     	} catch (Exception e) {}
-    	return temp;
     	
     	StringTokenizer st = new StringTokenizer(temp.get(0), "#");
     	for (int i = 0; i < st.countTokens(); i++) {
-    		
+    		String tempStr = st.nextToken();
+    		if (i == 0) {
+    			timesig = Integer.parseInt(tempStr.trim());
+    		} else if (i == 1) {
+    			bpm = Integer.parseInt(tempStr.trim());
+    		}
     	}
     	
-    	
     	ArrayList<Note> output = new ArrayList<Note>();
+    	Note tempNote = new Note();
+    	
+    	for (int x = 1; x < temp.size(); x++) {
+    		boolean longNote = false;
+    		st = new StringTokenizer(temp.get(x), "#");
+    		int measure = 0;
+    		int beat = 0;
+    		int position = 0;
+    		int endbeat = 0;
+    		int length = 0;
+    		
+    		measure = Integer.parseInt(st.nextToken());
+    		beat = Integer.parseInt(st.nextToken());
+    		int time = ((measure - 1) * timesig * 8) + (beat+1);
+    				
+    		position = Integer.parseInt(st.nextToken());
+    		if (st.hasMoreTokens()) {
+    			longNote = true;
+    			endbeat = Integer.parseInt(st.nextToken());
+    			length = ((endbeat - beat));
+    		}
+    		
+    		if (longNote == true) {
+    			tempNote = new Long (position, time, length);
+    		} else if (longNote == false) {
+    			tempNote = new Short (position, time);
+    		}
+    		
+    		output.add(tempNote);    		
+    	}
+    	
+    	return output;
     	
     }
     
