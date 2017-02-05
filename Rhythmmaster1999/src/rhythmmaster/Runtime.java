@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import static rhythmmaster.Rhythmmaster1999.kevin;
 
-public class Runtime extends JFrame {
+public class Runtime implements Runnable {
 
     int tempo;
     int mpb;
@@ -31,7 +31,7 @@ public class Runtime extends JFrame {
         x = 0;
     }
     
-    void run() {
+    public void run() {
         
         initialize();
         
@@ -137,22 +137,6 @@ public class Runtime extends JFrame {
     	
     	return output;
     	
-    }
-    
-    void draw() {
-
-        BufferedImage backBuffer = new BufferedImage(C.SCREENWIDTH, C.SCREENHEIGHT, BufferedImage.TYPE_INT_RGB);
-
-        Graphics g = kevin.getGraphics();
-        Graphics bbg = backBuffer.getGraphics();
-        
-        bbg.setColor(Color.WHITE);
-        bbg.fillRect(0, 0, C.SCREENWIDTH, C.SCREENHEIGHT);
-
-        bbg.setColor(Color.BLACK);
-        bbg.fillRect(C.SCREENWIDTH/2-100, x-100, C.NOTEWIDTH, C.NOTEHEIGHT);
-        
-        g.drawImage(backBuffer, 0, 0, this);
     }
 
     static boolean isRunning() {
