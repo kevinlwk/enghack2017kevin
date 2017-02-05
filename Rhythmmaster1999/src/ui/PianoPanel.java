@@ -60,12 +60,12 @@ public class PianoPanel extends JPanel{
 	public void drawNotes (Graphics g){
 		for (Note e : notes){
 			/*if (- e.distanceFromLine + 9 * framesPassed > 0 && - e.distanceFromLine + 9 * framesPassed < SCREEN_HEIGHT - LINE_HEIGHT){
-				g.setColor(new Color(1.0f,1.0f,1.0f, 1.0f - (float)((- e.distanceFromLine + 9 * framesPassed)/(float)(SCREEN_HEIGHT - LINE_HEIGHT))));
+				g.setColor(new Color(1.0f,1.0f,1.0f, s.0f - (float)((- e.distanceFromLine + 9 * framesPassed)/(float)(SCREEN_HEIGHT - LINE_HEIGHT))));
 			} else {*/
 				if (e.isScored){
 					if (e.missed){
 						g.setColor(Color.red);
-					} else{
+					} else {
 						g.setColor(Color.green);
 					}
 				} else {

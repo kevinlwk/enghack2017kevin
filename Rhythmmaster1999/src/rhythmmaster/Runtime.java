@@ -25,7 +25,7 @@ public class Runtime implements Runnable {
 	private static final int MISSED_SCORE = -50;
 	
 	private static final int GRACE_SCORE = 0;
-
+	
 	private static final int NORMAL_SCORE = 400;
 	
 	private static final int PERFECT_SCORE = 1000;
@@ -116,12 +116,12 @@ public class Runtime implements Runnable {
 	        	isKeyPressed[6] = true;
 	        	break;
 	        case KeyEvent.VK_SEMICOLON:
-	        	paddle.move(true);
+	        	paddle.move(false);
 	        	break;
 	        default : break;
 	        }
-        if(evt.getKeyChar()=='\''){
-        	paddle.move(false);
+        if(evt.getKeyChar()=='a'){
+        	paddle.move(true);
         }
     }    
     
@@ -177,9 +177,15 @@ public class Runtime implements Runnable {
 	    				} else {
 	    					if (cDistance < PianoPanel.LINE_SIZE - Note.SHORT_NOTE_SIZE || cDistance > 0){
 	    						e.isScored = true;
+	    						if (e.isHit){
+	    							score += NORMAL_SCORE;
+	    						}
 	    						score += NORMAL_SCORE;
 	    					} else {
 	    						e.isScored = true;
+	    						if(e.isHit){
+	    							score += PERFECT_SCORE;
+	    						}
 	    						score += PERFECT_SCORE;
 	    					}
 	    				}
