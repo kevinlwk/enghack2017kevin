@@ -10,8 +10,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.Sequencer;
 import javax.swing.JFrame;
 
 import ui.BouncyBall;
@@ -50,7 +48,7 @@ public class Runtime implements Runnable {
     public void run() {
     	
         test = new ArrayList<Note>();
-        test = read("Happy-Birthday.txt");
+        test = read("carelessWhisper.txt");
         isKeyPressed = new boolean[7];
         ball = new BouncyBall(350,600,5,-3,30);
         paddle = new Paddle(350 - Paddle.PADDLE_SIZE/2);
