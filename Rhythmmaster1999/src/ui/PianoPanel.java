@@ -34,16 +34,6 @@ public class PianoPanel extends JPanel{
 		new PianoPanel();
 		this.notes = notes;
 		this.context=context;
-    		/*try {
-    			Sequencer sequencer = MidiSystem.getSequencer();
-    			sequencer.open();
-    			InputStream is = new BufferedInputStream(new FileInputStream(new File("happybirthday.mid")));
-    			sequencer.setSequence(is);
-    			sequencer.start();
-    		} catch (Exception e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}*/
 	}
 	
 	@Override
