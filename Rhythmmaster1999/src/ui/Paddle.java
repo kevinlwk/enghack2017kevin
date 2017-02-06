@@ -1,8 +1,8 @@
 package ui;
 
 public class Paddle {
-	public static int PADDLE_SIZE = 100;
-	public static int SPEED = 30;
+	public static int PADDLE_SIZE = 150;
+	public static int SPEED = 45;
 	
 	int x;
 	

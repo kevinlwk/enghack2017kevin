@@ -48,7 +48,7 @@ public class Runtime implements Runnable {
     public void run() {
     	
         test = new ArrayList<Note>();
-        test = read("carelessWhisper.txt");
+        test = read("Happy-Birthday.txt");
         isKeyPressed = new boolean[7];
         ball = new BouncyBall(350,600,5,-3,30);
         paddle = new Paddle(350 - Paddle.PADDLE_SIZE/2);
